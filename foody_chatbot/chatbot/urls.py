@@ -2,14 +2,14 @@ from django.urls import path
 
 from . import views
 from .views import (
-    TodoListApiView,
+    # TodoListApiView,
     GPTApiView
 )
 app_name = "chatbot"
 urlpatterns = [
-    path('api/completion/', GPTApiView.as_view()),
-    path('api/', TodoListApiView.as_view()),
-    path("", views.index, name="index"),
+    path('api/chat/', GPTApiView.as_view()),
+    # path('api/', TodoListApiView.as_view()),
+    # path("", views.index, name="index"),
     # # ex: /chatbot/5/
     # path("<int:question_id>/", views.detail, name="detail"),
     # # ex: /chatbot/5/results/

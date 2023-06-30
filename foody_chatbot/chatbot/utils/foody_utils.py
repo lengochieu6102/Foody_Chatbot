@@ -90,21 +90,29 @@ class FoodySearch:
 
         search_url = filter_response.json()['Url']
         search_url = f"{foody_url}{search_url}"
-
+        
         search_response = requests.get(search_url, headers = {
                 'User-Agent': 'Request-Promise',
                 'X-Requested-With': 'XMLHttpRequest'
         })
         search_json = search_response.json()
-        results_res = ""
+        results_res = "Dưới đây là một số món ăn tôi tìm được: "
+        add_info_res = []
         for idx, search_item in enumerate(search_json['searchItems']):
             if results_res:
                 results_res += "\n"
             results_res += f"{idx+1}. {search_item['Name']}"
+            add_info_res.append({
+                'name': search_item['Name'],
+                'url': self.foody_url + search_item['DetailUrl'],
+                'image_url': search_item['PicturePathLarge'],
+                'address': search_item['Address']
+            })
         
         return {
             "search_object": search_json,
-            "restaurants_response": results_res
+            "restaurants_response": results_res,
+            "add_info_res": add_info_res
         }
 
 def edit_distance(s1, s2):
